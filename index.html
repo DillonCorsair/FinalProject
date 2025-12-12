@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create custom music album posters with color palettes, lyrics, and typography">
+    <title>Album Poster Design Hub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <section id="left">
+        <header>
+            <h1 id="title">ALBUM POSTER DESIGNER</h1>
+        </header>
+        <section id="create">
+            <div id="upload">
+                <div id="album-artist-input">
+                    <input class="input" type="text" id="album-name" placeholder="Enter Album Name">
+                    <input class="input" type="text" id="artist-name" placeholder="Enter Artist Name">
+                </div>
+                <div class="image-input-section">
+                    <!-- <label>Image</label> -->
+                    <div class="unified-image-input">
+                        <input type="text" id="image-input" placeholder="Enter Image Address">
+                        <div class="or-text">
+                            OR
+                        </div>
+                        <input type="file" id="image-file-input" accept="image/*" style="display: none;">
+                        <button type="button" id="image-upload-btn" class="upload-btn">Upload</button>
+                    </div>
+                </div>
+                <div>
+                    <button type="button" id="create-poster-btn" class="upload-btn" style="width: 100%;">CREATE</button>
+                </div>
+            </div>
+            <div id="customize">
+                <!-- Section 1: Canvas Setup (Size & Orientation) - Foundation first -->
+                <div class="customize-section" id="size">
+                    <div class="customize-section-title"><h2>SIZE</h2></div>
+                    <ul class="option-list">
+                        <li class="option-item" data-value="paper">Paper</li>
+                        <li class="option-item active" data-value="tabloid">Tabloid</li>
+                    </ul>
+                </div>
+
+                <!-- Section 2: Layout - Structure -->
+                <div class="customize-section" id="layout-section">
+                    <div class="customize-section-title"><h2>LAYOUT</h2></div>
+                    <div class="layout-options" id="layout-options">
+                        <button class="layout-option-btn active" data-layout="A">A</button>
+                        <button class="layout-option-btn" data-layout="B">B</button>
+                        <button class="layout-option-btn" data-layout="C">C</button>
+                    </div>
+                </div>
+
+                <!-- Section 3: Visual Design (Color & Pattern) - Styling -->
+                <div class="customize-section" id="color">
+                    <div class="customize-section-title"><h2>COLOR</h2></div>
+                    <div class="color-controls">
+                        <div class="color-item">
+                            <label>Background</label>
+                            <input type="color" class="color-thumbnail" id="color-background" value="#FAFAFA">
+                        </div>
+                        <div class="color-item">
+                            <label>Text</label>
+                            <input type="color" class="color-thumbnail"  id="color-text" value="#000000">
+                        </div>
+                        <div class="color-item">
+                            <label>Accent</label>
+                            <input type="color" class="color-thumbnail"  id="color-accent" value="#000000">
+                        </div>
+                    </div>
+                    <!-- Color palette from uploaded image will appear here -->
+                    <div id="color-palette-display" class="color-palette" style="display: none;"></div>
+                </div>
+                <!-- Section 4: Typography (Font & Text Content) - Content -->
+                <div class="customize-section" id="font">
+                    <div class="customize-section-title"><h2>FONT</h2></div>
+                    <div id="font-section">
+                        <button id="font-select-btn" class="font-select-btn">Roboto</button>
+                        <div id="font-dropdown" class="font-dropdown" style="display: none;">
+                            <!-- Font options will be populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+                <div class="customize-section" id="scale"> 
+                    <div class="customize-section-title"><h2>SCALE</h2></div>
+                    <input type="range" min="0.5" max="2" step="0.1" value="1" id="track-scale-slider" class="track-scale-slider">
+                </div>
+                <div class="customize-section" id="text">
+                    <div class="customize-section-title"><h2>TEXT</h2></div>
+                    <div id="text-options-container">
+                        <ul class="text-options">
+                            <li><button class="text-option-btn active" id="album-description" data-type="description">Description</button></li>
+                            <li><button class="text-option-btn" id="lyrics-excerpt" data-type="lyrics">Lyric Excerpt</button></li>
+                        </ul>
+                        <div id="song-content-container">
+                            <!-- Song Selection UI (shown when lyrics option is selected) -->
+                            <div id="song-selection-ui" style="display: none; margin-top: 1rem;">
+                                <button id="select-song-btn" class="select-song-btn">Select a Song</button>
+                                <div id="song-dropdown" class="song-dropdown" style="display: none;">
+                                    <!-- Dropdown will be populated dynamically -->
+                                </div>
+                            </div>
+                            <!-- Lyrics Display (scroll box) -->
+                            <div id="lyrics-display-container" style="display: none; margin-top: 1rem;">
+                                <div id="lyrics-scroll-box" class="lyrics-scroll-box">
+                                    <!-- Lyrics will be displayed here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+
+                
+            </div>
+        </section>
+    </section>
+    <section id="middle">
+        <nav>
+            <ul>
+                <li> <a href="index.html" class="nav-link active">CREATE</a></li>
+                <li> <a href="gallery.html" class="nav-link">GALLERY</a></li>
+            </ul>
+        </nav>
+        <div id="save-export">
+            <button class="action-btn" id="save-btn">SAVE</button>
+            <button class="action-btn" id="export-btn">EXPORT</button>
+        </div>
+    </section>
+    <section id="preview">
+        <!-- <div id="preview-container"> -->
+            <div id="poster-preview" class="poster-canvas">
+                <!-- Background layer -->
+                <div id="poster-background" class="poster-layer"></div>
+                
+                <!-- Pattern overlay (if selected) -->
+                <div id="poster-pattern" class="poster-layer pattern-overlay"></div>
+                
+                <!-- Content container -->
+                <div id="poster-content" class="poster-content">
+                    <!-- Album Art Section -->
+                    <div id="poster-album-art" class="album-art-container">
+                        <img id="album-art-image" src="" alt="Album Art" style="display: none;">
+                    </div>
+                    
+                    <!-- Title Section -->
+                    <div id="poster-titles" class="titles-section">
+                        <h1 id="poster-album-name" class="name">Album Name</h1>
+                        <h1 id="poster-artist-name" class="name">Artist</h1>
+                    </div>
+                    
+                    <!-- Divider -->
+                    <div id="poster-divider" class="divider-line"></div>
+                    
+                    <!-- Bottom Section -->
+                    <div id="poster-bottom" class="bottom-section">
+                        <!-- Left: Track List -->
+                        <div id="poster-tracks" class="tracks-list">
+                            <ol id="tracks-list-items">
+                                <li>Track</li>
+                                <li>Track</li>
+                                <li>Track</li>
+                                <li>Track</li>
+                                <li>Track</li>
+                                <li>Track</li>
+                                <li>Track</li>
+                                <li>Track</li>
+                                <li>Track</li>
+                                <li>Track</li>
+                            </ol>
+                        </div>
+                        
+                        <!-- Right: Metadata & Content -->
+                        <div id="poster-metadata" class="metadata-section">
+                            <!-- <div class="metadata-item">
+                                <span class="metadata-label">R</span>
+                                <span id="poster-record-label" class="metadata-value">Record Label</span>
+                            </div> -->
+                            <!-- Text Content (Lyrics or Description) -->
+                            <div id="poster-text-content" class="text-content">
+                                "Lyric Excerpt..." (Track)
+                            </div>
+                            <div id="poster-metadata-items">
+                                <div id="duration-release-date">
+                                    <div class="metadata-item">
+                                        <span id="poster-duration" class="metadata-value">Duration</span>
+                                    </div>
+                                    <div class="metadata-item">
+                                        <span id="poster-release-date" class="metadata-value">Release Date</span>
+                                    </div>  
+                                </div>
+                                <div id="poster-palette-swatches">
+                                    <div class="color-swatch" data-color="#f5f5f5"></div>
+                                    <div class="color-swatch" data-color="#cccccc"></div>
+                                    <div class="color-swatch" data-color="#999999"></div>
+                                    <div class="color-swatch" data-color="#666666"></div>
+                                    <div class="color-swatch" data-color="#333333"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            <!-- </div> -->
+        </div>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Initialize preview on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initializePreview();
+        });
+        
+        function initializePreview() {
+            const poster = document.getElementById('poster-preview');
+            
+            // Set default values
+            poster.setAttribute('data-size', 'tabloid');
+            poster.setAttribute('data-orientation', 'vertical');
+            
+            // Update preview based on current settings
+            updatePreview();
+        }
+        
+        function updatePreview() {
+            // This function is now handled by script.js
+            // It will be called automatically when inputs change
+        }
+        
+        // Listen for color changes to update preview (both 'input' for real-time and 'change' for final)
+        const colorInputs = ['color-background', 'color-text', 'color-accent'];
+        colorInputs.forEach(colorId => {
+            const input = document.getElementById(colorId);
+            if (input) {
+                input.addEventListener('input', () => {
+                    if (typeof updatePosterContent === 'function') {
+                        updatePosterContent();
+                    }
+                });
+                input.addEventListener('change', () => {
+                    if (typeof updatePosterContent === 'function') {
+                        updatePosterContent();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+
+           

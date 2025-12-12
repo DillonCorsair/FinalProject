@@ -1,0 +1,162 @@
+/* ============================================
+   GALLERY PAGE STYLES
+   ============================================ */
+
+body {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 2% 4% 2% 4%;
+}
+
+#top {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+/* 
+#left {
+    min-width: 40vw;
+} */
+
+.gallery-page {
+    display: flex;
+    flex-direction: column;
+}
+
+.gallery-header {
+    padding: 2rem;
+    border-bottom: 2px solid #000;
+}
+
+.gallery-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem;
+    container-type: inline-size; /* Enable container query units (cqw) */
+}
+
+.gallery-grid {
+    display: flex;
+    flex-direction: row; /* Explicitly set to row */
+    flex-wrap: wrap;
+    gap: 4rem;
+    padding: 2rem 0;
+    width: 100%; /* Ensure full width */
+    justify-content: space-between;
+}
+
+.gallery-item {
+    width: 22cqw; /* 1/5 of viewport width */
+    min-width: 0; /* Allow shrinking if needed */
+    flex: 0 0 22cqw; /* Don't grow or shrink, use 20vw as basis */
+    max-width: 22cqw; /* Prevent growing beyond 20vw */
+    border: 3px solid #000;
+    border-radius: 1.5rem;
+    padding: 2em;
+    background: #fff;
+    cursor: pointer;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    box-sizing: border-box;
+}
+
+/* Portrait orientation: 2 items per row */
+@media (orientation: portrait), (min-height: 100vw) {
+    .gallery-item {
+        width: calc(50% - 2rem); /* 2 items per row, accounting for gap */
+        flex: 0 0 calc(50% - 2rem);
+        max-width: calc(50% - 2rem);
+    }
+}
+
+.gallery-item:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-item-image {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 1rem auto;
+    border: 2px solid #000;
+}
+
+.gallery-item-info {
+    margin-bottom: 1rem;
+}
+
+.gallery-item-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.gallery-item-artist {
+    font-size: 1.25rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.gallery-item-date {
+    font-size: 0.875rem;
+    color: #999;
+}
+
+.gallery-item-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.gallery-action-btn {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 3px solid #000;
+    border-radius: 1.5rem;
+    background: #fff;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s ease-out, color 0.2s ease-out;
+    font-size: 1rem;
+}
+
+.gallery-action-btn:hover {
+    background: #000;
+    color: #fff;
+}
+
+.empty-gallery {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #999;
+}
+
+.empty-gallery h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.empty-gallery p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.empty-gallery a {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border: 3px solid #000;
+    border-radius: 1.5rem;
+    background: #000;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.2s ease-out, color 0.2s ease-out;
+}
+
+.empty-gallery a:hover {
+    background: #fff;
+    color: #000;
+}
+

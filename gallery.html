@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View and manage your saved album posters">
+    <title>Gallery - Album Poster Design Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="gallery.css">
+</head>
+<body id="gallery-body">
+    <section id="top">
+        <section id="left">
+            <header>
+                <h1 id="title">ALBUM POSTER DESIGNER</h1>
+            </header>
+        </section>
+        <section id="middle">
+            <nav>
+                <ul>
+                    <li> <a href="index.html" class="nav-link">CREATE</a></li>
+                    <li> <a href="gallery.html" class="nav-link active">GALLERY</a></li>
+                </ul>
+            </nav>
+        </section>
+        <section id="gallery-right">
+        </section>
+    </section>
+    <section id="bottom" class="gallery-page">
+        <div class="gallery-content">
+            <div id="gallery-grid" class="gallery-grid">
+                <!-- Gallery items will be populated here -->
+            </div>
+            <div id="empty-gallery" class="empty-gallery" style="display: none;">
+                <h2>No Saved Posters</h2>
+                <p>Create your first poster to see it here!</p>
+                <a href="index.html">CREATE POSTER</a>
+            </div>
+        </div>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="gallery.js"></script>
+</body>
+</html>
+

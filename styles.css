@@ -1,0 +1,1065 @@
+html {
+    font-family: 'Inter', sans-serif;
+    font-weight: regular;
+    font-size: 20px;
+}
+
+body:not(#gallery-body) {
+    display: flex;
+    flex-direction: row;
+    margin: 2% 4% 2% 4%;
+    gap: 2rem;
+    justify-content: space-between;
+    height: 92vh;
+}
+
+/* Portrait orientation: when viewport is taller than wide */
+@media (orientation: portrait), (min-height: 100vw) {
+    body:not(#gallery-body) {
+        flex-direction: column-reverse; /* Reverse order so #right appears on top */
+        height: auto;
+        min-height: 92vh;
+    }
+    
+    body:not(#gallery-body) #left,
+    body:not(#gallery-body) #middle,
+    body:not(#gallery-body) #right {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    /* Add bottom margin to #left in portrait */
+    body:not(#gallery-body) #left {
+        margin-bottom: 12%;
+    }
+    
+    /* Reverse the order of #middle elements in portrait */
+    body:not(#gallery-body) #middle {
+        flex-direction: row; /* Save/Export on top, Nav on bottom */
+    }
+    
+    /* Put customize-section-titles and option-list on separate lines in portrait */
+    body:not(#gallery-body) .customize-section {
+        flex-direction: column;
+    }
+}
+
+/* Grid for 6 items - 3 columns, 2 rows */
+.layout-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+/* Layout Options */
+.layout-options {
+    display: flex;
+    gap: 2cqw;
+    width: 100%;
+}
+
+.layout-option-btn {
+    flex: 1; /* Evenly distribute width */
+    padding: 0.75rem 1.5rem;
+    background: #ffffff;
+    color: #000000;
+    font-weight: bold;
+    cursor: pointer;
+    border: 3px solid #000;
+    border-radius: 1.5rem;
+    font-size: 2.25rem;
+    transition: background 0.2s ease-out, color 0.2s ease-out;
+    text-align: center;
+}
+
+.layout-option-btn:hover {
+    background: #000000;
+    color: #ffffff;
+}
+
+.layout-option-btn.active {
+    background: #000000;
+    color: #ffffff;
+}
+
+/* Responsive: 2 columns on tablet, 1 on mobile */
+@media (max-width: 768px) {
+    .layout-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+#create {
+    font-size: 1.5rem;
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: grey;
+    transition: color 0.2s ease-out;
+}
+
+a:hover {
+    color: #000;
+}
+
+h1 {
+    margin: 0;
+    line-height: 1;
+    white-space: nowrap; /* Ensure text stays on one line */
+    /* Font-size will be set dynamically by JavaScript to fit container */
+}
+
+h2 {
+    line-height: 1;
+}
+
+input {
+    font-family: 'Inter', sans-serif;
+}
+
+#upload input.input, #image-input {
+    height: 3rem; /* Adjust this value to change input height */
+    line-height: 1rem; /* Match height to center text vertically */
+}
+
+#left {
+    min-width: 40vw;
+}
+
+::placeholder, #middle, #middle button, #create, h2, .upload-btn, .text-option-btn {
+    font-size: 2.25rem;
+}
+
+#upload {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+#create {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.customize {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.active {
+    font-weight: bold;
+}
+
+#album-artist-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    gap: 1rem;
+}
+
+#upload input {
+    padding: 0.5rem 1rem 0.5rem 1.25rem;
+    color: #000;
+    width: 100%;
+    font-weight: bold;
+    font-size: 2.25rem;
+}
+
+/* Unified Image Input */
+.unified-image-input {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+#image-input {
+    flex: 1;
+    line-height: 1rem;
+    padding: 1.5rem 1.5rem;
+    color: #000;
+    font-weight: bold;
+    font-size: 2.25rem;
+}
+
+#image-upload-btn {
+    flex: 1;
+    text-align: left;
+}
+
+
+.upload-btn, .text-option-btn {
+    padding: 0.75rem 1.5rem;
+    background: #ffffff;
+    color: #000000;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s ease-out, color 0.2s ease-out;
+    height: 4.5rem;
+}
+
+#upload input, #image-input, .upload-btn, .text-option-btn {
+    border: 3px solid #000;
+    border-radius: 1.5rem;
+}
+
+.upload-btn:hover, .text-option-btn:hover {
+    background: #000000;
+    color: #ffffff;
+}
+
+.text-option-btn.active {
+    background: #000000;
+    color: #ffffff;
+}
+
+#create-poster-btn {
+    color: white;
+    background: #000000;
+    transition: background 0.2s ease-out, color 0.2s ease-out;
+    &:hover {
+        color: #000000;
+        background: #ffffff;
+    }
+}
+
+::placeholder {
+    color: #000;
+    font-weight: bold;
+    line-height: 1rem;
+}
+
+.customize-section {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 1rem;
+    padding-bottom: 1rem;
+}
+
+/* Disabled state for customize section (before CREATE is clicked) */
+#customize.disabled * {
+    color: #999999 !important;
+    border-color: #999999 !important;
+    pointer-events: none !important;
+    cursor: not-allowed !important;
+}
+
+#customize.disabled button,
+#customize.disabled .option-item,
+#customize.disabled input[type="color"],
+#customize.disabled .text-option-btn,
+#customize.disabled .font-select-btn,
+#customize.disabled .font-dropdown-item {
+    color: #999999 !important;
+    border-color: #999999 !important;
+}
+
+#customize.disabled button:hover,
+#customize.disabled .option-item:hover,
+#customize.disabled .text-option-btn:hover,
+#customize.disabled .font-select-btn:hover,
+#customize.disabled .font-dropdown-item:hover {
+    color: #999999 !important;
+}
+
+.customize-section-title {
+    width: 11cqw;
+    flex-shrink: 0; /* Prevent title from shrinking */
+}
+
+.option-list, .color-controls {
+    display: flex;
+    gap: 2cqw;
+}
+
+.track-scale-slider {
+    width: 100%;
+    height: 0.5rem;
+    background: #ffffff;
+    border: 3px solid #000000;
+    border-radius: 1.5rem;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+.track-scale-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: #000000;
+    border: 3px solid #000000;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.track-scale-slider::-moz-range-thumb {
+    width: 1.5rem;
+    height: 1.5rem;
+    background: #000000;
+    border: 3px solid #000000;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.track-scale-slider:hover {
+    background: #f5f5f5;
+}
+
+.track-scale-slider:active {
+    background: #e0e0e0;
+}
+
+.option-item {
+    cursor: pointer;
+    transition: font-weight 0.2s ease;
+}
+
+.option-item:hover {
+    font-weight: bold;
+}
+
+.option-item.active {
+    font-weight: bold;
+}
+
+.color-controls input[type="color"] {
+    height: 1.75rem;
+    width: 1.75rem;
+    padding: 0;
+    border: 1px solid #000;
+    cursor: pointer;
+    /* Remove default browser styling */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* Ensure color fills completely */
+    background: none;
+    overflow: hidden;
+}
+
+/* Webkit browsers (Chrome, Safari, Edge) */
+.color-controls input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+.color-controls input[type="color"]::-webkit-color-swatch {
+    border: none;
+    /* Make the color swatch fill the entire input */
+    width: 100%;
+    height: 100%;
+}
+
+/* Firefox */
+.color-controls input[type="color"]::-moz-color-swatch {
+    border: none;
+    /* Make the color swatch fill the entire input */
+    width: 100%;
+    height: 100%;
+}
+
+.color-thumbnail {
+    margin-left: 1rem;
+}
+
+ul.text-options{
+    width: 100%;
+    display: flex;
+    gap: 2cqw;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul.text-options li {
+    flex: 1; /* Make each button take equal width */
+    min-width: 0; /* Prevent overflow */
+}
+
+ul.text-options .text-option-btn {
+    width: 100%; /* Buttons fill their container */
+}
+
+/* Song Selection UI */
+.select-song-btn {
+    padding: 0.75rem 1.5rem;
+    background: #ffffff;
+    color: #000000;
+    font-weight: bold;
+    cursor: pointer;
+    border: 3px solid #000;
+    border-radius: 1.5rem;
+    width: 100%;
+    text-align: left;
+    transition: background 0.2s ease-out, color 0.2s ease-out;
+    height: 4.5rem;
+    font-size: 2.25rem;
+}
+
+.select-song-btn:hover {
+    background: #000000;
+    color: #ffffff;
+}
+
+.song-dropdown {
+    margin-top: 0.5rem;
+    border: 3px solid #000;
+    border-radius: 1.5rem;
+    background: #ffffff;
+    max-height: 300px;
+    overflow-y: auto;
+    position: relative;
+    z-index: 10;
+}
+
+.song-dropdown-item {
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    border-bottom: 1px solid #000;
+    font-size: 2.25rem;
+    font-weight: bold;
+    transition: background 0.2s ease-out;
+}
+
+.song-dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.song-dropdown-item:hover {
+    background: #000000;
+    color: #ffffff;
+}
+
+#font-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1;
+    min-width: 0; /* Prevents flex item from overflowing */
+}
+
+/* Font Select Button */
+.font-select-btn {
+    padding: 1rem 1rem 1rem 1.25rem;
+    color: #000;
+    width: 100%;
+    font-weight: bold;
+    font-size: 2.25rem;
+    border: 3px solid #000;
+    border-radius: 1.5rem;
+    background: #ffffff;
+    cursor: pointer;
+    text-align: left;
+    height: 4.5rem;
+    line-height: 1rem;
+    transition: background 0.2s ease-out, color 0.2s ease-out;
+}
+
+.font-select-btn:hover {
+    background: #000000;
+    color: #ffffff;
+}
+
+/* Font Dropdown */
+.font-dropdown {
+    margin-top: 0.5rem;
+    border: 3px solid #000;
+    border-radius: 1.5rem;
+    background: #ffffff;
+    max-height: 400px;
+    overflow-y: auto;
+    position: relative;
+    z-index: 10;
+}
+
+.font-dropdown-item {
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    border-bottom: 1px solid #000;
+    font-size: 2.25rem;
+    font-weight: bold;
+    transition: background 0.2s ease-out;
+}
+
+.font-dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.font-dropdown-item:hover {
+    background: #000000;
+    color: #ffffff;
+}
+
+.font-dropdown-item.selected {
+    background: #000000;
+    color: #ffffff;
+}
+
+/* Lyrics Display */
+.lyrics-scroll-box {
+    border: 3px solid #000;
+    border-radius: 1.5rem;
+    background: #ffffff;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 1rem;
+    font-size: 1.5rem;
+    line-height: 1.8;
+}
+
+.lyrics-line {
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    transition: font-weight 0.2s ease-out, background 0.2s ease-out;
+    user-select: none;
+}
+
+.lyrics-line:hover {
+    font-weight: bold;
+}
+
+.lyrics-line.selected {
+    background: #f0f0f0;
+    font-weight: bold;
+}
+
+#middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-weight: bold;
+    color: grey;
+    width: 100%;
+}
+
+#middle button {
+    background-color: white;
+    border: none;
+    text-align: right;
+    font-weight: bold;
+    color: grey;
+    transition: color 0.2s ease-out;
+}
+
+#middle button:hover {
+    color: #000;
+    cursor: pointer;
+}
+
+nav ul, #save-export  {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+nav a.nav-link {
+    color: grey;
+    text-decoration: none;
+    transition: color 0.2s ease-out;
+}
+
+nav a.nav-link:hover,
+nav a.nav-link.active {
+    color: #000;
+    font-weight: bold;
+}
+
+#save-export {
+    color: grey;
+    text-align: right;
+}
+
+#save-export:nth-child(1)::hover {
+    color: #000;
+}
+
+/* ============================================
+   PREVIEW SECTION
+   ============================================ */
+
+#preview {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* overflow: auto; */
+    min-width: 40vw;
+}
+
+/* #preview-container { */
+    /* width: 100%; */
+    /* max-height: 100%; */
+    /* max-width: 600px; */
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+/* Poster Canvas - Base Container */
+.poster-canvas {
+    position: relative;
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
+    background: #2d2d2d;
+    /* box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); */
+    overflow: hidden;
+    
+    /* Default: Tabloid Vertical (11x17) */
+    aspect-ratio: 11 / 17;
+    display: flex;
+    flex-direction: column;
+    
+    /* Enable container queries for font scaling */
+    container-type: size;
+    container-name: poster;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+}
+
+/* Poster Layers */
+.poster-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+#poster-background {
+    background: #FAFAFA;
+    z-index: 1;
+}
+
+.pattern-overlay {
+    opacity: 0.1;
+    z-index: 2;
+    background-size: 50px 50px;
+    background-repeat: repeat;
+}
+
+/* Poster Content */
+.poster-content {
+    position: relative;
+    z-index: 10;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 3rem;
+    color: #000000;
+    overflow: hidden;
+    box-sizing: border-box; /* Include padding in height calculation */
+    
+    /* Base font-size that scales with container size */
+    /* Uses container query width units for proper scaling */
+    font-size: clamp(0.8rem, 5cqw, 11.25cqw); /* max = 2.25 * 5cqw */
+    min-height: 0; /* Allow flex children to shrink */
+}
+
+/* Layout Option A (Standard): Image, Titles, Divider, Bottom */
+.poster-content[data-layout="A"] #poster-album-art {
+    order: 1;
+}
+.poster-content[data-layout="A"] #poster-titles {
+    order: 2;
+}
+.poster-content[data-layout="A"] #poster-divider {
+    order: 3;
+}
+.poster-content[data-layout="A"] #poster-bottom {
+    order: 4;
+}
+
+/* Layout Option B: Titles, Image, Divider, Bottom */
+.poster-content[data-layout="B"] #poster-titles {
+    order: 1;
+}
+.poster-content[data-layout="B"] #poster-album-art {
+    order: 2;
+}
+.poster-content[data-layout="B"] #poster-divider {
+    order: 3;
+}
+.poster-content[data-layout="B"] #poster-bottom {
+    order: 4;
+}
+
+/* Layout Option C: Titles, Divider, Bottom, Image */
+.poster-content[data-layout="C"] #poster-titles {
+    order: 1;
+}
+.poster-content[data-layout="C"] #poster-divider {
+    order: 2;
+}
+.poster-content[data-layout="C"] #poster-bottom {
+    order: 3;
+}
+.poster-content[data-layout="C"] #poster-album-art {
+    order: 4;
+}
+
+/* Use container queries for true container-relative scaling (modern browsers) */
+@container poster (min-width: 0px) {
+    .poster-content {
+        /* Scale based on container width */
+        font-size: clamp(0.8rem, 5cqw, 11.25cqw); /* max = 2.25 * 5cqw */
+    }
+}
+
+/* Album Art Section */
+.album-art-container {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: linear-gradient(0deg, #292929 0%, #8c8c8c 100%);
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0; /* Don't shrink album art */
+    max-width: 100%; /* Don't exceed container */
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+}
+
+#album-art-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none; /* Hidden by default, shown when image is loaded */
+}
+
+.album-art-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: clamp(0.5rem, 4.5cqw, 9cqw); /* max = 2 * 4.5cqw */
+}
+
+/* Titles Section */
+.titles-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+    margin-bottom: 1rem;
+    gap: 1rem;
+    width: 100%;
+    min-width: 0; /* Allow flex children to shrink */
+    max-width: 100%; /* Don't exceed container */
+    overflow: hidden; /* Prevent overflow */
+    box-sizing: border-box;
+    flex-shrink: 0; /* Don't shrink titles section */
+}
+
+
+#poster-album-name, #poster-artist-name {
+    margin: 0;
+    line-height: 1;
+    font-size: clamp(0.96rem, 4cqw, 11.25cqw); /* max = 2.25 * 5cqw */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+    /* flex: 1; Allow both to share space equally */
+    min-width: 0; /* Allow shrinking */
+}
+
+#poster-album-name {
+    text-transform: uppercase;
+}
+#poster-artist-name {
+    text-align: right;
+    text-transform: capitalize;
+    /* font-weight: normal; */
+}
+
+/* Divider */
+.divider-line {
+    height: 4px;
+    background: rgb(0, 0, 0);
+}
+
+/* Bottom Section */
+.bottom-section {
+    display: flex; /* Use flexbox instead of grid for better space-between control */
+    flex-direction: row;
+    gap: 2rem;
+    flex: 1;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    min-height: 0; /* Allows flex children to shrink */
+    max-height: 100%;
+    font-size: clamp(0.72rem, 2.5cqw, 5.625cqw); /* max = 2.25 * 4.5cqw */
+    overflow: hidden; /* Prevent overflow */
+    box-sizing: border-box;
+    align-items: stretch; /* Stretch items to full height */
+    justify-content: space-between;
+}
+
+/* Tracks List */
+.tracks-list {
+    line-height: 1.2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-width: 0; /* Allow shrinking */
+    max-width: 100%; /* Don't exceed container */
+    box-sizing: border-box;
+    flex-shrink: 0; /* Don't shrink tracks list */
+}
+
+#tracks-list-items {
+    list-style: decimal;
+    list-style-position: inside;
+    padding: 0;
+    margin: 0;
+    color: rgb(0, 0, 0);
+    /* Always single column - font-size will be adjusted to fit */
+    column-count: 1;
+    height: 100%;
+    min-height: 0; /* Allow shrinking */
+    max-height: 100%; /* Don't exceed container height */
+    display: block;
+    width: 100%; /* Use full available width */
+    max-width: 100%; /* Ensure it doesn't exceed container */
+    box-sizing: border-box;
+    min-width: 0; /* Allow shrinking */
+    
+    /* Track list font-size values - easily adjustable (using cqw units) */
+    --track-font-size-1-5: clamp(1.12rem, 7cqw, 15.75cqw);   /* Reduced by 30% */
+    --track-font-size-6-10: clamp(0.672rem, 4.2cqw, 9.45cqw);    /* Reduced by 30% */
+    --track-font-size-11-15: clamp(0.42rem, 2.625cqw, 5.90625cqw); /* Reduced by 30% */
+    --track-font-size-16-20: clamp(0.297rem, 1.855cqw, 4.17375cqw);   /* Reduced by 30% */
+    --track-font-size-21-plus: clamp(0.297rem, 1.855cqw, 4.17375cqw); /* Reduced by 30% */
+}
+
+#tracks-list-items li {
+    margin-bottom: 0.25rem;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    /* Prevent list items from breaking across columns */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Metadata Section */
+.metadata-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    justify-content: space-between;
+    min-width: 0; /* Allow shrinking */
+    max-width: 50%; /* Maximum 50% of container width */
+    overflow: hidden; /* Prevent overflow */
+    box-sizing: border-box;
+    width: 50%; /* Set to 50% width */
+    flex-shrink: 1; /* Allow shrinking if needed */
+}
+
+/* .metadata-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    align-items: baseline;
+}
+
+.metadata-label {
+    color: rgb(0, 0, 0);
+    font-weight: 500;
+}
+
+.metadata-value {
+    color: rgb(0, 0, 0);
+    text-align: right;
+}
+
+
+
+/* Text Content */
+.text-content {
+    line-height: 1.2;
+    font-size: clamp(0.6rem, 2cqw, 8.4375cqw); /* max = 2.25 * 3.75cqw */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+    display: -webkit-box;
+    -webkit-line-clamp: 8; /* Limit to 8 lines */
+    line-clamp: 8; /* Standard property for compatibility */
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    max-width: 100%; /* Don't exceed container */
+    min-width: 0; /* Allow shrinking */
+    box-sizing: border-box;
+}
+
+#text-options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.text-content p {
+    margin: 0;
+    font-size: 2cqw; /* Relative to text-content, which is already in cqw */
+    text-align: left;
+}
+
+#poster-metadata-items {
+    font-weight: bold;
+}
+
+#duration-release-date {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    /* justify-content: space-between; */
+    text-align: right;
+}
+
+/* Color Palette in Preview */
+#poster-palette-swatches {
+    display: flex;
+    justify-content: space-between;
+    gap: 0rem;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+#poster-palette-swatches .color-swatch {
+    flex: 1; /* Each swatch takes equal space, filling the width */
+    height: 3cqh; /* Height depends on container height using container query units */
+    min-width: 0; /* Allow shrinking if needed */
+    /* Use CSS custom property for background color - set via JavaScript using setProperty() */
+    /* This avoids inline style override issues */
+    background-color: var(--swatch-color, #222222);
+}
+
+/* ============================================
+   SIZE VARIATIONS
+   ============================================ */
+
+/* Paper (8.5x11) */
+.poster-canvas[data-size="paper"] {
+    aspect-ratio: 8.5 / 11;
+}
+
+/* Paper size specific adjustments */
+.poster-canvas[data-size="paper"] .poster-content {
+    padding-left: 6rem; /* Increased from 4.5rem */
+    padding-right: 6rem; /* Increased from 4.5rem */
+    padding-top: 3rem; /* Keep top padding */
+    padding-bottom: 3rem; /* Keep bottom padding */
+}
+
+/* Decrease font-size for paper size */
+.poster-canvas[data-size="paper"] .bottom-section {
+    font-size: clamp(0.54rem, 2cqw, 7.59375cqw); /* max = 2.25 * 3.375cqw */
+}
+
+/* Decrease text-content font-size for paper size */
+.poster-canvas[data-size="paper"] .text-content {
+    font-size: clamp(0.4rem, 2cqw, 5.625cqw); /* max = 2.25 * 2.5cqw */
+}
+
+/* Tabloid (11x17) - Default */
+.poster-canvas[data-size="tabloid"] {
+    aspect-ratio: 11 / 17;
+}
+
+/* Tabloid size specific adjustments */
+.poster-canvas[data-size="tabloid"] .text-content {
+    font-size: clamp(0.6rem, 2.5cqw, 1.35rem); /* Same as default text-content */
+}
+
+/* Phone (9:16) */
+.poster-canvas[data-size="phone"] {
+    aspect-ratio: 9 / 16;
+}
+
+/* Desktop (16:9) */
+.poster-canvas[data-size="desktop"] {
+    aspect-ratio: 16 / 9;
+}
+
+/* ============================================
+   ORIENTATION VARIATIONS
+   ============================================ */
+
+/* Horizontal orientation - swap aspect ratio */
+.poster-canvas[data-orientation="horizontal"] {
+    aspect-ratio: 17 / 11; /* Flipped for horizontal */
+}
+
+.poster-canvas[data-orientation="horizontal"][data-size="paper"] {
+    aspect-ratio: 11 / 8.5;
+}
+
+.poster-canvas[data-orientation="horizontal"][data-size="tabloid"] {
+    aspect-ratio: 17 / 11;
+}
+
+.poster-canvas[data-orientation="horizontal"][data-size="phone"] {
+    aspect-ratio: 16 / 9;
+}
+
+.poster-canvas[data-orientation="horizontal"][data-size="desktop"] {
+    aspect-ratio: 9 / 16;
+}
+
+/* Horizontal layout adjustments */
+.poster-canvas[data-orientation="horizontal"] .titles-section {
+    flex-direction: row;
+}
+
+.poster-canvas[data-orientation="horizontal"] .bottom-section {
+    grid-template-columns: 1fr 1fr;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+    #preview {
+        padding: 1rem;
+    }
+    
+    .poster-content {
+        padding: 0.5rem;
+    }
+    
+    #poster-album-name {
+        font-size: clamp(1.2rem, 7.5cqw, 16.875cqw); /* max = 2.25 * 7.5cqw */
+    }
+    
+    #poster-artist-name {
+        font-size: clamp(1.2rem, 7.5cqw, 16.875cqw); /* max = 2.25 * 7.5cqw */
+    }
+    
+    .bottom-section {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
