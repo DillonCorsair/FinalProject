@@ -8,13 +8,24 @@ import dotenv from 'dotenv';
 import OAuth from 'oauth-1.0a';
 import crypto from 'crypto';
 
-dotenv.config();
+// Load environment variables from .env file (if it exists)
+// On Render, environment variables are set directly, so this is optional
+try {
+  dotenv.config();
+} catch (error) {
+  console.warn('Could not load .env file (this is OK on Render):', error.message);
+}
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.static('.')); // Serve static files
+
+// Health check endpoint for Render
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
+});
 
 // Initialize OAuth 1.0a for Discogs API
 // Discogs requires the full OAuth flow - you need access tokens (not just consumer key/secret)
@@ -349,10 +360,31 @@ app.get('/api/discogs/release/:id', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-  console.log('Make sure OPENAI_API_KEY is set in your .env file');
-  console.log('For Discogs API: Add DISCOGS_TOKEN and DISCOGS_SECRET to your .env file');
-  console.log('Get credentials at: https://www.discogs.com/settings/developers');
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (err) => {
+  console.error('Unhandled Promise Rejection:', err);
+  // Don't exit - let the server continue running
 });
+
+// Handle uncaught exceptions
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
+  // Don't exit - let the server continue running
+});
+
+// Start the server
+try {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+    console.log('Environment check:');
+    console.log('  OPENAI_API_KEY:', process.env.OPENAI_API_KEY ? '✓ Set' : '✗ Missing');
+    console.log('  DISCOGS_TOKEN:', process.env.DISCOGS_TOKEN ? '✓ Set' : '✗ Missing');
+    console.log('  DISCOGS_SECRET:', process.env.DISCOGS_SECRET ? '✓ Set' : '✗ Missing');
+    console.log('  DISCOGS_ACCESS_TOKEN:', process.env.DISCOGS_ACCESS_TOKEN ? '✓ Set' : '✗ Missing');
+    console.log('  DISCOGS_ACCESS_TOKEN_SECRET:', process.env.DISCOGS_ACCESS_TOKEN_SECRET ? '✓ Set' : '✗ Missing');
+  });
+} catch (error) {
+  console.error('Failed to start server:', error);
+  process.exit(1);
+}
 
