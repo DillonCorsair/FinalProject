@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Create custom music album posters with color palettes, lyrics, and typography",
   "type": "module",
-  "main": "script.js",
+  "main": "server.js",
   "engines": {
     "node": ">=18.0.0"
   },
