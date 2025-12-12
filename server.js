@@ -373,15 +373,26 @@ process.on('uncaughtException', (err) => {
 });
 
 // Start the server
+// On Render, bind to 0.0.0.0 to listen on all network interfaces
+const HOST = process.env.HOST || '0.0.0.0';
+
 try {
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+  const server = app.listen(PORT, HOST, () => {
+    console.log(`Server running on ${HOST}:${PORT}`);
     console.log('Environment check:');
     console.log('  OPENAI_API_KEY:', process.env.OPENAI_API_KEY ? '✓ Set' : '✗ Missing');
     console.log('  DISCOGS_TOKEN:', process.env.DISCOGS_TOKEN ? '✓ Set' : '✗ Missing');
     console.log('  DISCOGS_SECRET:', process.env.DISCOGS_SECRET ? '✓ Set' : '✗ Missing');
     console.log('  DISCOGS_ACCESS_TOKEN:', process.env.DISCOGS_ACCESS_TOKEN ? '✓ Set' : '✗ Missing');
     console.log('  DISCOGS_ACCESS_TOKEN_SECRET:', process.env.DISCOGS_ACCESS_TOKEN_SECRET ? '✓ Set' : '✗ Missing');
+  });
+
+  // Handle server errors
+  server.on('error', (error) => {
+    console.error('Server error:', error);
+    if (error.code === 'EADDRINUSE') {
+      console.error(`Port ${PORT} is already in use`);
+    }
   });
 } catch (error) {
   console.error('Failed to start server:', error);
