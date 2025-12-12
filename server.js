@@ -2,11 +2,17 @@
 // Run with: npm start
 // Requires: npm install express dotenv
 
+console.log('Starting server...');
+console.log('Node version:', process.version);
+console.log('Current directory:', process.cwd());
+
 import express from 'express';
 import { generateWithReasoning } from './openai-service.js';
 import dotenv from 'dotenv';
 import OAuth from 'oauth-1.0a';
 import crypto from 'crypto';
+
+console.log('✓ All imports successful');
 
 // Load environment variables from .env file (if it exists)
 // On Render, environment variables are set directly, so this is optional
